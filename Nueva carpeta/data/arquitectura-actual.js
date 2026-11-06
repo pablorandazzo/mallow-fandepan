@@ -1,0 +1,77 @@
+/* T-02 — Arquitectura empresarial actual */
+window.DATA=window.DATA||{};
+DATA.actual={
+ callout:"El mapa no refleja la solución del proyecto, sino la realidad de hoy: procesos mayormente informales, sostenidos por el CEO y coordinados de forma manual a través de planillas y mensajería.",
+ /* mapa de procesos: cada elemento enlaza IDs de la tabla 2.2 */
+ mapa:{
+  estrategia:[["Definir estrategia y objetivos de la marca",["PROC-01"]],["Planificar la expansión de la red de franquicias",["PROC-02"]],["Analizar el mercado y la competencia / gestionar innovación del portafolio",["PROC-03","PROC-04","PROC-05"]],["Analizar el desempeño comercial y financiero de la red",["PROC-14"]]],
+  operativo:[["Fase 1 · Captación y evaluación",["PROC-06"]],["Fase 2 · Asignación de local",["PROC-07","PROC-08"]],["Fase 3 · Puesta en marcha (obra + sistemas)",["PROC-09"]],["Fase 4 · Onboarding y capacitación (franquiciado y personal)",["PROC-10","PROC-13"]],["Fase 5 · Operación y supervisión de red (auditorías de locales y procesos)",["PROC-11"]]],
+  soporte:[
+   ["Marketing y comunicación",[["Procesos creativos",["PROC-17"]],["Promoción en calle",["PROC-18"]],["Plataformas digitales y redes",["PROC-12"]],["Marketing y comunicación integral",["PROC-22"]]]],
+   ["Administración y finanzas",[["Contabilizar operaciones",["PROC-20"]],["Gestionar el flujo de caja / cashflow",["PROC-16"]],["Pólizas y seguros",["PROC-21"]],["Equipos de trabajo de oficina",["PROC-19"]]]],
+   ["Legales, obras y trámites",[["Asuntos legales",["PROC-23"]],["Coordinar y supervisar obras",["PROC-24"]],["Mantenimiento de locales y equipos",["PROC-25"]],["Gestorías, habilitaciones y manuales",["PROC-26","PROC-15"]]]]]},
+ procesos:[
+  ["PROC-01","Definir estrategia y objetivos de la marca","Estratégico","CEO","Rumbo, objetivos y metas de crecimiento; decisiones que orientan a toda la red."],
+  ["PROC-02","Planificar la expansión de la red de franquicias","Estratégico","CEO","Cuántos locales abrir, en qué zonas y a qué ritmo."],
+  ["PROC-03","Analizar el mercado y la competencia","Estratégico","CEO","Seguimiento del sector, competidores y tendencias de consumo."],
+  ["PROC-04","Analizar e innovar en nuevos productos","Estratégico","CEO","Innovar probando con ciertos franquiciados el impacto en clientes."],
+  ["PROC-05","Analizar e incorporar nuevas herramientas tecnológicas","Estratégico","CEO","Análisis de nuevas tecnologías para estar al día con el mercado."],
+  ["PROC-06","Evaluar y seleccionar franquiciados e inversores","Operativo","CEO","Presentación del modelo por videoconferencia y mail; prospectos por marca, referidos o eventos."],
+  ["PROC-07","Buscar y evaluar locales potenciales","Operativo","CEO","Recorrido propio o propuestas traídas por el interesado."],
+  ["PROC-08","Negociaciones con inmobiliarias","Operativo","CEO","Reuniones para definir términos y condiciones de los contratos de los nuevos locales."],
+  ["PROC-09","Planificación de obra","Operativo","CEO","Coordinación de agentes, presupuestos, condiciones de pago y cashflow de obra."],
+  ["PROC-10","Capacitar / onboarding a franquiciados","Operativo","CEO","Visitas a locales en funcionamiento y presentación de los procesos."],
+  ["PROC-11","Auditar locales y procesos","Operativo","Supervisión","Visita mensual con test integral (Terrand); clasifica cumple / necesita mejorar / no cumple."],
+  ["PROC-12","Actualizar plataformas digitales","Soporte","Marketing","Contenido para redes, promociones, reels e influencers."],
+  ["PROC-13","Capacitar a empleados","Operativo","RRHH","Formación del personal en estándares y procesos para una operación homogénea."],
+  ["PROC-14","Analizar el desempeño comercial y financiero de la red","Estratégico","CEO / Administración","Consolida ventas, desempeño y métricas de campañas en un único control para decisiones del CEO."],
+  ["PROC-15","Creación de manuales operativos","Soporte","CEO","Documentación de procesos y estándares para todas las sucursales."],
+  ["PROC-16","Gestionar el flujo de caja (Cashflow) de oficina","Soporte","Administración","Registro y control de ingresos y egresos de la casa matriz para asegurar liquidez."],
+  ["PROC-17","Desarrollar e implementar procesos creativos","Soporte","CEO","Ideas y contenidos creativos para la comunicación institucional y campañas."],
+  ["PROC-18","Ejecutar actividades de promoción en calle","Soporte","Marketing","Acciones directas en vía pública para ganar visibilidad."],
+  ["PROC-19","Gestionar equipos de trabajo","Soporte","CEO","Coordinación interna de los equipos de casa matriz y asignación de tareas."],
+  ["PROC-20","Contabilizar operaciones","Soporte","CEO","Registro contable y cumplimiento tributario; tercerizado en un contador externo."],
+  ["PROC-21","Gestionar pólizas y seguros","Soporte","CEO","Coberturas de locales y operación; vencimientos y siniestros."],
+  ["PROC-22","Gestionar marketing y comunicación","Soporte","Marketing","Estrategia global de comunicación, redes y campañas."],
+  ["PROC-23","Gestionar asuntos legales","Soporte","CEO","Asuntos contractuales y normativos, con soporte externo."],
+  ["PROC-24","Coordinar y supervisar obras","Soporte","CEO","Supervisión de avances, plazos y presupuestos de remodelaciones y aperturas."],
+  ["PROC-25","Realizar mantenimiento de locales y equipos","Soporte","Supervisión","Mantenimiento preventivo y correctivo de instalaciones."],
+  ["PROC-26","Tramitar gestorías y habilitaciones","Soporte","CEO","Permisos municipales y gubernamentales para habilitar y operar sucursales."]],
+ ae:{
+  cols:["Estratégico","Operativo","Soporte"],
+  rows:[
+   ["Usuarios",[["CEO"],["CEO","Supervisión","Administración","RRHH"],["CEO","Marketing","Contador externo"]]],
+   ["Procesos",[["Estrategia","Expansión","Mercado","Innovación"],["Franquicias","Locales","Obras","Supervisión","Capacitación","Reportes"],["Marketing y comunicación","Contabilidad","Legales","Seguros","Mantenimiento","Habilitaciones"]]],
+   ["Aplicaciones",[["Google Workspace","Excel/Sheets","Ayres IT","PedidosYa"],["TERRAND","Ayres IT (POS)","PedidosYa","Google Workspace","Excel/Sheets"],["WhatsApp","Gmail","Google Drive/Docs/Sheets","Meta/Instagram","Meta Ads","Canva/Adobe","Home Banking","Portal AFIP","Aseguradoras"]]],
+   ["Datos",[["Información estratégica","Ventas","Métricas","Mercado","Competencia","Franquicias"],["Facturación","Tickets","Productos vendidos","Auditorías","Checklists","Desvíos","Estado de franquicias / datos de locales"],["Cashflow","Movimientos de caja","Conciliaciones","Comprobantes","Pólizas","Contratos","Documentación legal"]]],
+   ["Tecnología",[["PCs/Notebooks","Celulares","Internet","Cloud"],["SaaS/Cloud (TERRAND, Ayres IT, PedidosYa, Google Workspace)"],["PCs/Notebooks","Celulares","Internet","Google Workspace"]]]],
+  pie:"Situación actual: información fragmentada entre sistemas SaaS, planillas Excel/Sheets y herramientas de comunicación. La integración y consolidación de información se realiza principalmente de forma manual.",
+  leer:"Se lee como grilla: las cinco filas son las capas (usuarios, procesos, aplicaciones, datos, tecnología) y las tres columnas, los dominios del negocio (estratégico, operativo, soporte)."},
+ datosTxt:"Arquitectura de datos mixta y fragmentada en silos. Los sistemas oficiales (TERRAND, Ayres IT, PedidosYa) generan reportes propios que no se integran entre sí ni con la contabilidad; la consolidación se hace «a mano» con exportaciones CSV/Excel. La Planilla de Cashflow de oficina es un Excel editable por varios usuarios, sin control de versiones ni trazabilidad, que concentra buena parte de la información financiera crítica.",
+ almacenes:[
+  ["DAT-01","Reporte_PedidosYa","Planilla Excel","OLAP (analítico)","Facturación mensual, tickets, ticket promedio, ingresos por venta, artículos vendidos, comisión PeYa","No relevado"],
+  ["DAT-02","Reporte_Ayres","Planilla Excel","OLAP (analítico)","Facturación mensual, tickets, ticket promedio, ingresos por venta, artículos vendidos","No relevado"],
+  ["DAT-03","Reporte_Terrand","Planilla Excel","OLAP (analítico)","Puntajes de auditoría, check-list y desvíos operativos por local (PROC-11)","No relevado"],
+  ["DOC-01","Planilla Cashflow (oficina)","Excel","OLTP (manual)","Movimientos de caja, conciliaciones bancarias, comprobantes de pago, balances de caja","No relevado"]],
+ seguridad:"Ninguno de los almacenes relevados cuenta con medidas de seguridad o control de acceso documentadas: las planillas se comparten y editan libremente — un riesgo para la integridad de la información financiera.",
+ appsTxt:"Un pequeño núcleo de sistemas SaaS oficiales + uso extendido de herramientas informales (Shadow IT). Excel/Sheets y WhatsApp son el «pegamento» real entre los sistemas oficiales: la información se extrae de una plataforma, se vuelca en una planilla y se coordina por mensajería, sin integración formal.",
+ apps:[
+  ["APP-01","TERRAND","EHS","Digitalización de procesos HSE, calidad y auditorías operativas en puntos de venta (PROC-11)","SaaS","Oficial"],
+  ["APP-02","Ayres IT","POS","POS y reportes comerciales (tickets, ventas, arqueos de caja)","SaaS","Oficial"],
+  ["APP-03","Pedidos Ya","Delivery","Pedidos online y logística externa","SaaS","Oficial"],
+  ["APP-04","Sheets / Excel","Shadow IT","Planillas usadas informalmente para consolidación y seguimiento financiero","N/A","Informal (Shadow IT)"],
+  ["APP-05","WhatsApp","Mensajería","Coordinación operativa, consultas rápidas e intercambio informal","N/A","Informal (Shadow IT)"],
+  ["APP-06","Ecosistema Google","Colaboración","Drive, Docs, Sheets, Calendar para gestión documental y trabajo colaborativo","SaaS","Oficial"],
+  ["APP-07","Gmail","Correo","Comunicaciones formales e intercambio de archivos","SaaS","Oficial"]],
+ otras:"Otras herramientas (fuera del catálogo formal): sistema contable externo y Portal AFIP (PROC-20) · Home Banking (PROC-16) · software de monitoreo CCTV/VMS (control en PROC-11) · Meta Ads e Instagram (PROC-12, PROC-14) · Canva / Adobe (PROC-17) · portales de municipios y aseguradoras (PROC-21, PROC-26).",
+ cobCols:["TERRAND","Ayres IT","Pedidos Ya","Sheets/Excel","WhatsApp","Google (Eco)","Gmail"],
+ cobertura:{1:[6],2:[4,6],3:[6],4:[2,4],5:[6],6:[5,7],7:[4,6],8:[5,6,7],9:[4,6],10:[5,6],11:[1,4,7],12:[6],13:[5,6],14:[2,3,4],15:[6],16:[4,6],17:[6],18:[5,6],19:[5,6],20:[7],21:[6,7],22:[5,6],23:[6,7],24:[4,5,6],25:[1,5],26:[6,7]},
+ cobInsight:"Un proceso sin marca se sostiene íntegramente fuera de estas siete aplicaciones (reuniones, tareas manuales, coordinación presencial).",
+ tecTxt:"Infraestructura liviana, coherente con una organización sin equipo propio de sistemas; un parque reducido de PCs, notebooks y celulares que accede a sistemas SaaS por Internet. Sin servidores propios ni infraestructura on-premise: toda la capacidad de cómputo corre en la nube de cada proveedor (TERRAND, Ayres IT, PedidosYa, Google Workspace).",
+ infra:[
+  ["INFRA-01","3 computadoras","PC de escritorio","Windows","Uso operativo en casa matriz"],
+  ["INFRA-02","3 celulares","Dispositivo móvil","Android","Coordinación vía WhatsApp y llamadas"],
+  ["INFRA-03","6 notebooks","Portátiles","Windows","Puestos de trabajo flexibles en oficina"],
+  ["INFRA-04","Conexión a Internet","Red y conectividad","N/A","Acceso web en sede central"],
+  ["CLOUD-01","Plataformas SaaS (TERRAND, Ayres IT, PedidosYa, Google Workspace)","Cloud pública","Gestionado por proveedores","Sin contratos unificados de SLA"]]
+};
