@@ -1,6 +1,6 @@
 __pycache__/
 *.pyc
-.venv-qa/
+
 node_modules/
 dist/
 test-results/

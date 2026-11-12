@@ -1,6 +1,6 @@
 # Mallow · React + Motion
 
-Landing pública y carpeta navegable del caso Fan de Pan, desarrolladas en React con Vite y Motion for React. La versión anterior en `Nueva carpeta/` se conserva sin modificaciones.
+Landing pública y carpeta navegable del caso Fan de Pan, desarrolladas en React con Vite y Motion for React.
 
 ## Ejecutar
 
@@ -46,7 +46,7 @@ Cada entrega tiene resumen navegable y pestaña de documento. T-01–T-07 están
 
 Por decisión explícita del usuario, el caso usa la contraseña académica `fce2026` definida en texto plano en el frontend. El acceso se recuerda en `sessionStorage`, conserva los enlaces directos a entregas y puede cerrarse con **Salir del caso**. Es una barrera de presentación, no autenticación de servidor: los archivos estáticos se pueden consultar mediante su URL. El usuario también autorizó incluir los originales en el sitio; ya no se bloquean detrás de un requisito de servidor. El correo comercial sigue sin definirse y no se simulan envíos.
 
-La versión anterior NO se copia al build ni al directorio público. Publicar solamente `dist/`.
+Publicar solamente `dist/`, generado por Vite.
 
 ## Documentos originales y PDFs
 
@@ -76,11 +76,9 @@ La suite de navegador prueba landing, identidad, recorrido modal/caso, las once 
 
 Las pruebas de integración verifican las copias reales incluidas en el sitio, la clave, la descarga y el visor bajo demanda. Las cuatro pruebas Node del servidor auxiliar cubren cierre por defecto, lista de archivos, rutas de la caché, origen/host, métodos y conversiones desactualizadas; no implican que los archivos publicados tengan autenticación. Sus fixtures nunca se muestran en la UI.
 
-Los tests de Python existentes corresponden a la versión estática anterior y no a esta landing React.
-
 ## Publicar
 
-El `vercel.json` de la raíz configura Vite, `dist` y el acceso directo a `/caso-fan-de-pan`. Usar la raíz del repositorio como Root Directory del proyecto Vercel. El commit `4ccb7e4` guarda la landing previa a la página del caso. La implementación posterior permanece sin commit; no se realizó push ni despliegue.
+El `vercel.json` de la raíz configura Vite, `dist` y el acceso directo a `/caso-fan-de-pan`. Usar la raíz del repositorio como Root Directory del proyecto Vercel. Los commits de referencia son `4ccb7e4` (landing) y `9dbab76` (caso navegable y documentos). El push y el despliegue son pasos separados.
 
 ## Motion
 
