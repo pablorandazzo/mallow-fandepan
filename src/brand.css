@@ -1,0 +1,37 @@
+/* Source of truth: Actuación Profesional/Mallow.html (brand identity).
+   Keep the original botanical SVG paths, serif wordmark, and brand colors. */
+:root {
+  --purple: #6956E8;
+  --ink: #111827;
+  --muted: #526079;
+  --paper: #F8FAFC;
+  --font-body: "Inter", system-ui, sans-serif;
+  --serif: "DM Serif Display", Georgia, serif;
+}
+body, button { font-family: var(--font-body); }
+h1, h2, h3, em { font-family: var(--serif); font-style: normal; font-weight: 400; }
+.brand > span,
+.footer-top .brand > span {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 38px;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+.mark { object-fit: contain; flex-shrink: 0; }
+.brand .mark { width: 38px; height: 38px; }
+.header { background: #F8FAFCed; }
+.hero h1, .hero h1 em { letter-spacing: -1.6px; }
+h2, .contact h2 { letter-spacing: -.8px; }
+.hero h1 em, .contact h2 em { color: var(--purple); }
+.services-section, .team-section { background: #FFFFFF; }
+.philosophy, .footer { background: #ECEBFF; }
+.method { background: #111827; }
+.sculpture-inner .mark { filter: none; }
+.avatar > .mark { opacity: .1; }
+.academic-mark > span, .contact-spark { font-family: var(--font-body); }
+@media (max-width: 560px) {
+  .brand > span, .footer-top .brand > span { font-size: 31px; }
+  .brand .mark { width: 31px; height: 31px; }
+  .hero h1, .hero h1 em { letter-spacing: -.8px; }
+}

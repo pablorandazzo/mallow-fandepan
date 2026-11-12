@@ -1,0 +1,115 @@
+/* Supporting copy stays readable on the soft brand surfaces. */
+:root {
+  --muted: #6e6477;
+}
+.hero-description,
+.hero-footnote,
+.hero-bottom,
+.art-tag,
+.art-note small,
+.art-caption,
+.expertise-strip span,
+.philosophy p,
+.values p,
+.values article > span,
+.section-heading > p,
+.service-card p,
+.service-top > span:last-child,
+.chips span,
+.outline-label,
+.case-source,
+.person p,
+.academic-mark,
+.team-academic p,
+.contact-bottom p,
+.contact-note,
+.footer-top > p,
+.back-to-top,
+.footer-bottom,
+.dialog-inner > p:not(.eyebrow),
+.dialog-grid article > span,
+.dialog-grid p,
+.privacy-note {
+  color: #6f617a;
+}
+.case-kicker,
+.case-copy > p,
+.case-tags span,
+.case-disclaimer,
+.case-art-label,
+.case-fact > span,
+.case-fact strong {
+  color: #785e45;
+}
+.avatar > span:first-child,
+.avatar .person-number {
+  color: #604568;
+}
+.avatar-peach > span:first-child,
+.avatar-peach .person-number {
+  color: #795c45;
+}
+.avatar-sage > span:first-child,
+.avatar-sage .person-number {
+  color: #58694a;
+}
+.avatar-pink > span:first-child,
+.avatar-pink .person-number {
+  color: #70455a;
+}
+.method .section-heading > p,
+.method-description > p,
+.method-tabs button,
+.method .step-number,
+.method-visual > span,
+.diagram-label,
+.deliverable small {
+  color: #bdb0ca;
+}
+.method-tabs button[aria-selected="true"] {
+  color: #e0d0fb;
+}
+.service-card p,
+.values p,
+.philosophy p,
+.person p,
+.case-copy > p,
+.method-description > p,
+.dialog-grid p {
+  font-size: 13px;
+}
+.chips span,
+.case-tags span,
+.case-disclaimer,
+.case-source,
+.team-academic p,
+.contact-note p,
+.footer-bottom {
+  font-size: 10px;
+}
+.case-kicker,
+.outline-label,
+.person-number,
+.deliverable small {
+  font-size: 9px;
+}
+
+@media (max-width: 560px) {
+  .hero-art-wrapper {
+    padding-inline: 6px;
+  }
+  .service-card p,
+  .values p,
+  .person p,
+  .case-copy > p,
+  .method-description > p {
+    font-size: 12px;
+  }
+  .outline-label {
+    white-space: normal;
+    line-height: 1.7;
+  }
+  .footer-bottom {
+    font-size: 9px;
+  }
+}
