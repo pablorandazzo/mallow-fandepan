@@ -41,6 +41,9 @@
 .case-fact strong {
   color: #785e45;
 }
+.case-art-label {
+  color: #63482f;
+}
 .avatar > span:first-child,
 .avatar .person-number {
   color: #604568;

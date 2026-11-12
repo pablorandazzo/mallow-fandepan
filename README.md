@@ -27,6 +27,7 @@ La suite utiliza el sitio en `http://127.0.0.1:5178`. Los originales funcionan t
 - `src/styles.css`: diseño y responsive.
 - `src/readability.css`: ajustes de contraste y legibilidad sobre las superficies pastel.
 - `public/mallow-mark.svg`: isotipo botánico original extraído de `Mallow.html`, con sus tres trazados y posiciones preservados.
+- `public/fan-de-pan-logo.png`: logotipo naranja original de la cabecera de `https://fandepan.com.ar/`, descargado de `/wp-content/uploads/2026/01/logo-naranja.png` sin modificar sus bytes, colores ni proporciones. Se usa en la tarjeta, el modal y la cabecera del caso; `e2e/client-brand.spec.js` comprueba su integridad y presentación responsive.
 - `src/brand.css`: identidad original: DM Serif Display en marca/títulos, Inter en interfaz, tinta `#111827`, niebla `#F8FAFC` y violeta `#6956E8`.
 - `src/CasePage.jsx`, `src/case.css`: página del caso, índice, resúmenes, pestañas y visor PDF nativo del navegador.
 - `src/caseContent.js`: once entregas, fuentes, estados y síntesis web basadas en los documentos actuales.

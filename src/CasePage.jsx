@@ -530,7 +530,13 @@ export default function CasePage() {
         </a>
         <div className="case-header-project">
           <span>CASO DE CONSULTORÍA</span>
-          <strong>Fan de Pan</strong>
+          <img
+            className="fan-de-pan-logo"
+            src="/fan-de-pan-logo.png"
+            alt="Fan de Pan"
+            width="226"
+            height="23"
+          />
         </div>
         <a className="case-return" href="/#caso">
           <ArrowLeft size={16} />

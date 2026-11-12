@@ -30,6 +30,17 @@ h2, .contact h2 { letter-spacing: -.8px; }
 .sculpture-inner .mark { filter: none; }
 .avatar > .mark { opacity: .1; }
 .academic-mark > span, .contact-spark { font-family: var(--font-body); }
+.fan-de-pan-logo {
+  display: block;
+  width: 226px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.dialog-client-logo {
+  width: 180px;
+  margin-bottom: 24px;
+}
 @media (max-width: 560px) {
   .brand > span, .footer-top .brand > span { font-size: 31px; }
   .brand .mark { width: 31px; height: 31px; }

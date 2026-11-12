@@ -29,9 +29,8 @@
   letter-spacing: 1.5px;
   color: #6d6780;
 }
-.case-header-project strong {
-  font-size: 13px;
-  font-weight: 550;
+.case-header-project .fan-de-pan-logo {
+  width: 138px;
 }
 .case-return {
   margin-left: auto;

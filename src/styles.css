@@ -963,57 +963,26 @@ h2 em {
   justify-content: center;
   overflow: hidden;
 }
-.case-art:before {
-  content: "";
-  position: absolute;
-  width: 350px;
-  height: 350px;
-  border-radius: 50%;
-  background: #efd6b9;
-  z-index: -1;
-}
-.bread-seal {
-  transform: rotate(-9deg);
-  width: 229px;
-  height: 229px;
+.case-client-brand {
+  width: min(82%, 310px);
+  min-height: 160px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid #99744b;
+  gap: 20px;
+  background: #fff;
+  border: 1px solid #fff5e9b3;
+  border-radius: 12px;
+  box-shadow: 0 12px 36px #795d3414;
+  margin-top: -35px;
+}
+.case-client-brand > span {
   color: #775530;
-  border-radius: 50%;
-  position: relative;
-  margin-top: -28px;
-}
-.bread-seal:before {
-  position: absolute;
-  inset: 8px;
-  border: 1px dashed #99744b8f;
-  border-radius: 50%;
-  content: "";
-}
-.bread-seal > svg {
-  width: 60px;
-  height: 41px;
-  margin-bottom: 8px;
-}
-.bread-seal > span {
-  font-weight: 800;
-  font-size: 37px;
-  line-height: 0.98;
+  font-size: 8px;
+  letter-spacing: 1.5px;
   text-align: center;
-  letter-spacing: -1.4px;
-}
-.seal-dot {
-  font-size: 12px;
-  position: absolute;
-  margin: 4px;
-}
-.bread-seal > small {
-  font-size: 5.5px;
-  letter-spacing: 2px;
-  margin-top: 15px;
 }
 .case-art-label {
   position: absolute;
@@ -1052,14 +1021,6 @@ h2 em {
   width: 18px;
   margin-left: auto;
   color: #a58a6b;
-}
-.case-orbit {
-  position: absolute;
-  inset: 40px -70px;
-  border: 1px solid #b88e5c25;
-  border-radius: 50%;
-  transform: rotate(35deg);
-  z-index: -1;
 }
 .case-source {
   display: flex;
@@ -1696,17 +1657,6 @@ h2 em {
     font-size: 6px;
     letter-spacing: 1px;
   }
-  .bread-seal {
-    width: 190px;
-    height: 190px;
-  }
-  .bread-seal > span {
-    font-size: 32px;
-  }
-  .case-art:before {
-    width: 280px;
-    height: 280px;
-  }
   .case-fact {
     padding: 11px 14px;
     gap: 10px;
@@ -2125,17 +2075,6 @@ h2 em {
   }
   .case-art {
     min-height: 360px;
-  }
-  .bread-seal {
-    width: 200px;
-    height: 200px;
-    margin-top: -35px;
-  }
-  .bread-seal > span {
-    font-size: 34px;
-  }
-  .bread-seal > svg {
-    width: 58px;
   }
   .case-fact {
     bottom: 21px;

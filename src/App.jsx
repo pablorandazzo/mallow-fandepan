@@ -264,6 +264,13 @@ function CaseDialog({ dialogRef }) {
         >
           <X />
         </button>
+        <img
+          className="fan-de-pan-logo dialog-client-logo"
+          src="/fan-de-pan-logo.png"
+          alt="Fan de Pan"
+          width="226"
+          height="23"
+        />
         <p className="eyebrow">MALLOW × FAN DE PAN / RESUMEN PÚBLICO</p>
         <h2 id="case-dialog-title">
           De una red que crece
@@ -623,26 +630,16 @@ export default function App() {
                 </small>
               </div>
               <div className="case-art">
-                <div className="bread-seal">
-                  <svg viewBox="0 0 100 62" fill="none" aria-hidden="true">
-                    <path
-                      d="M13 49C1 22 20 4 40 11C56-5 83 6 81 25C99 26 102 48 86 52H22C17 52 15 51 13 49Z"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                    />
-                    <path
-                      d="M30 25L37 37M48 19L55 31M67 26L72 36"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                  <span>
-                    FAN
-                    <br />
-                    DE PAN
-                  </span>
-                  <small>EL NEGOCIO DE CRECER.</small>
+                <div className="case-client-brand">
+                  <img
+                    className="fan-de-pan-logo"
+                    src="/fan-de-pan-logo.png"
+                    alt="Fan de Pan"
+                    width="226"
+                    height="23"
+                    loading="lazy"
+                  />
+                  <span>CASO DE CONSULTORÍA</span>
                 </div>
                 <span className="case-art-label">
                   GASTRONOMÍA / FRANQUICIAS
@@ -656,7 +653,6 @@ export default function App() {
                   </span>
                   <ArrowUpRight />
                 </div>
-                <div className="case-orbit" />
               </div>
             </article>
           </Reveal>
