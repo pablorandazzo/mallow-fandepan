@@ -1,0 +1,69 @@
+{
+  "enabled": true,
+  "mode": "static",
+  "documents": [
+    {
+      "id": "T-01",
+      "original": true,
+      "pdf": true,
+      "format": "DOCX",
+      "sourceFile": "TPL 01 actualizado.docx"
+    },
+    {
+      "id": "T-02",
+      "original": true,
+      "pdf": true,
+      "format": "DOCX",
+      "sourceFile": "TPL 02 actualizado.docx"
+    },
+    {
+      "id": "T-03",
+      "original": true,
+      "pdf": true,
+      "format": "DOCX",
+      "sourceFile": "TPL 03 actualizado.docx"
+    },
+    {
+      "id": "T-04",
+      "original": true,
+      "pdf": true,
+      "format": "DOCX",
+      "sourceFile": "TPL 04 actualizado.docx"
+    },
+    {
+      "id": "T-05",
+      "original": true,
+      "pdf": true,
+      "format": "DOCX",
+      "sourceFile": "TPL 05 actualizado.docx"
+    },
+    {
+      "id": "T-06",
+      "original": true,
+      "pdf": false,
+      "format": "XLSX",
+      "sourceFile": "TPL 06 actualizado.xlsx"
+    },
+    {
+      "id": "T-07",
+      "original": true,
+      "pdf": true,
+      "format": "DOCX",
+      "sourceFile": "TPL 07 actualizado.docx"
+    },
+    {
+      "id": "T-08",
+      "original": true,
+      "pdf": true,
+      "format": "DOCX",
+      "sourceFile": "TPL 08 v1.docx"
+    },
+    {
+      "id": "T-09",
+      "original": true,
+      "pdf": true,
+      "format": "DOCX",
+      "sourceFile": "TPL 09.docx"
+    }
+  ]
+}

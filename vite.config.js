@@ -1,6 +1,19 @@
 import { defineConfig } from "vite";
+import { caseDocumentsPlugin } from "./server/caseDocuments.mjs";
 
 export default defineConfig({
+  plugins: [caseDocumentsPlugin()],
+  server: {
+    fs: {
+      deny: [
+        ".env",
+        ".env.*",
+        "*.{crt,pem}",
+        "**/.git/**",
+        "**/.local-documents/**",
+      ],
+    },
+  },
   build: {
     rollupOptions: {
       onwarn(warning, defaultHandler) {

@@ -1,5 +1,9 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "vite"
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/caso-fan-de-pan", "destination": "/index.html" },
+    { "source": "/caso-fan-de-pan/", "destination": "/index.html" }
+  ]
 }

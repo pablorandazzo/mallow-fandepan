@@ -1,0 +1,148 @@
+.case-access-page {
+  min-height: 100dvh;
+  background: #f8fafc;
+  padding: 40px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.case-access-page > .brand {
+  margin-bottom: 36px;
+}
+.case-access-card {
+  width: min(100%, 455px);
+  padding: 36px 37px 28px;
+  border: 1px solid #e3dfee;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 18px 60px #30234608;
+}
+.access-lock {
+  width: 49px;
+  height: 49px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #ecebff;
+  color: #5942b5;
+  margin-bottom: 25px;
+}
+.case-access-card .eyebrow {
+  font-size: 9px;
+  margin-bottom: 15px;
+}
+.case-access-card h1 {
+  font-size: 45px;
+  line-height: 1.12;
+  letter-spacing: -0.8px;
+}
+.case-access-card h1 em {
+  color: #6956e8;
+}
+.case-access-card > p:not(.eyebrow) {
+  font-size: 12px;
+  color: #655d76;
+  line-height: 1.85;
+  margin-top: 21px;
+}
+.case-access-card form {
+  margin-top: 25px;
+}
+.case-access-card label {
+  font-size: 11px;
+  font-weight: 550;
+  color: #534763;
+  display: block;
+  margin-bottom: 9px;
+}
+.case-access-card input {
+  width: 100%;
+  min-height: 47px;
+  border: 1px solid #cbc2dd;
+  border-radius: 6px;
+  padding: 10px 13px;
+  font:
+    16px Inter,
+    sans-serif;
+  color: #111827;
+  background: #fff;
+}
+.case-access-card input:focus-visible {
+  outline: 3px solid #b6a4ec;
+  outline-offset: 2px;
+}
+.case-access-card input[aria-invalid="true"] {
+  border-color: #b43b53;
+}
+.case-access-card form > .button {
+  width: 100%;
+  margin-top: 19px;
+  justify-content: space-between;
+}
+.case-access-card p.access-session {
+  font-size: 10px;
+  margin-top: 18px;
+}
+.case-access-card .access-error {
+  color: #a52d43;
+  font-size: 11px;
+  line-height: 1.7;
+  margin-top: 12px;
+}
+.access-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin-top: 21px;
+  color: #6b5688;
+  font-size: 11px;
+}
+.access-academic {
+  color: #75677e;
+  font-size: 9px;
+  margin-top: 15px;
+  text-align: center;
+}
+.case-logout {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  border: 1px solid #dfd5ed;
+  border-radius: 6px;
+  background: transparent;
+  color: #6c5684;
+  min-height: 38px;
+  padding: 7px 11px;
+  font-size: 10px;
+}
+@media (max-width: 560px) {
+  .case-access-page {
+    padding-top: 30px;
+  }
+  .case-access-card {
+    padding: 29px 25px 24px;
+  }
+  .case-access-card h1 {
+    font-size: 40px;
+  }
+  .case-access-page > .brand {
+    margin-bottom: 27px;
+  }
+  .case-logout {
+    padding: 7px 9px;
+    font-size: 9px;
+  }
+  .case-study-header {
+    gap: 10px;
+  }
+  .case-study .case-return {
+    display: none;
+  }
+  .case-study .case-logout {
+    margin-left: auto;
+  }
+  .case-return {
+    margin-left: auto;
+  }
+}

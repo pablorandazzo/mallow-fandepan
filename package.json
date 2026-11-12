@@ -5,9 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
+    "dev:documents": "node scripts/dev-local.mjs",
+    "documents:prepare": "python scripts/prepare_case_pdfs.py",
+    "documents:publish": "node scripts/publish_case_documents.mjs",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "playwright test"
+    "test": "playwright test",
+    "test:documents": "node --test server/caseDocuments.test.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

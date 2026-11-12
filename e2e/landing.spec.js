@@ -61,7 +61,7 @@ test("el resumen del caso se abre, contiene límites y devuelve el foco al cerra
   const trigger = page.getByRole("button", { name: "Explorar el caso" });
   await trigger.click();
   await expect(page.getByRole("dialog")).toBeVisible();
-  await expect(page.getByRole("dialog")).toContainText("no está configurado");
+  await expect(page.getByRole("dialog")).toContainText("contraseña académica");
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).not.toBeVisible();
   await expect(trigger).toBeFocused();

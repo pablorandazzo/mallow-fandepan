@@ -308,16 +308,21 @@ function CaseDialog({ dialogRef }) {
           <p>
             Este resumen no incluye documentación financiera ni respuestas
             confidenciales de proveedores. La implementación está fuera del
-            alcance de la consultoría. El acceso privado requiere autenticación
-            de servidor y no está configurado en esta versión.
+            alcance de la consultoría. Para explorar las entregas se solicita
+            la contraseña académica del caso.
           </p>
         </div>
-        <button
-          className="button primary"
-          onClick={() => dialogRef.current.close()}
-        >
-          Volver al sitio <ArrowRight size={17} />
-        </button>
+        <div className="hero-actions">
+          <a className="button primary" href="/caso-fan-de-pan">
+            Ir al caso Fan de Pan <ArrowUpRight size={17} />
+          </a>
+          <button
+            className="button nav-contact"
+            onClick={() => dialogRef.current.close()}
+          >
+            Volver al sitio <ArrowRight size={17} />
+          </button>
+        </div>
       </div>
     </dialog>
   );
