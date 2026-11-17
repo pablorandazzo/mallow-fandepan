@@ -8,6 +8,7 @@
     "dev:documents": "node scripts/dev-local.mjs",
     "documents:prepare": "python scripts/prepare_case_pdfs.py",
     "documents:publish": "node scripts/publish_case_documents.mjs",
+    "documents:publish-t10-demo": "python scripts/publish_t10_demo.py",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test": "playwright test",

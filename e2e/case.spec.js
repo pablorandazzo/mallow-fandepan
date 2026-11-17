@@ -26,10 +26,10 @@ test("el modal lleva a una página del caso con las once entregas", async ({
     "Caso de negocio",
   );
   await expect(
-    page.getByRole("tab", { name: "Resumen navegable" }),
+    page.getByRole("tab", { name: "Introducción" }),
   ).toHaveAttribute("aria-selected", "true");
   await expect(
-    page.getByRole("tab", { name: "Documento original" }),
+    page.getByRole("tab", { name: "Documentos de la entrega" }),
   ).toBeVisible();
 });
 
@@ -43,14 +43,13 @@ test("cada entrega tiene contenido, estado y URL propia sin simular pendientes",
     await index.getByRole("link", { name: new RegExp(id) }).click();
     await expect(page).toHaveURL(new RegExp(`entrega=${id.toLowerCase()}`));
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    await expect(page.locator(".delivery-sections > section")).toHaveCount(
-      number <= 9 ? 3 : 2,
-    );
+    await expect(page.locator(".delivery-intro")).toHaveCount(1);
+    await expect(page.locator(".delivery-sections > section")).toHaveCount(0);
     await expect(page.locator(".delivery-header .delivery-status")).toHaveText(
-      number <= 7 ? "Disponible" : number <= 9 ? "Borrador" : "Pendiente",
+      number <= 10 ? "Disponible" : "Pendiente",
     );
   }
-  await page.getByRole("tab", { name: "Documento original" }).click();
+  await page.getByRole("tab", { name: "Documentos de la entrega" }).click();
   await expect(
     page.getByRole("heading", { name: "Documento pendiente" }),
   ).toBeVisible();
@@ -65,20 +64,29 @@ test("cada entrega tiene contenido, estado y URL propia sin simular pendientes",
   );
 });
 
-test("la matriz se explora como tabla y permite descargar el Excel original", async ({
+test("la entrega muestra solo una introducción antes de abrir el PDF", async ({ page }) => {
+  await page.goto("/caso-fan-de-pan?entrega=t-03");
+  await expect(page.locator(".delivery-intro")).toHaveText(
+    "Describe las capacidades de negocio, datos, aplicaciones y tecnología previstas para gestionar la información financiera de la red.",
+  );
+  await expect(page.getByRole("heading", { name: "Sobre este documento" })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Lo esencial, en pocas líneas." })).toHaveCount(0);
+  await page.screenshot({ path: "test-results/case-intro-desktop.png" });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({ path: "test-results/case-intro-mobile.png" });
+});
+
+test("la matriz se introduce brevemente y permite descargar el Excel completo", async ({
   page,
 }) => {
   await page.goto("/caso-fan-de-pan?entrega=t-06");
-  await expect(page.getByRole("table")).toBeVisible();
-  await expect(page.getByRole("table").getByRole("row")).toHaveCount(5);
-  await expect(
-    page.getByRole("cell", { name: "35%", exact: true }),
-  ).toBeVisible();
-  await page.getByRole("tab", { name: "Documento original" }).click();
+  await expect(page.locator(".delivery-intro")).toContainText("el Excel contiene su detalle");
+  await expect(page.getByRole("table")).toHaveCount(0);
+  await page.getByRole("tab", { name: "Documentos de la entrega" }).click();
   await expect(
     page.getByRole("link", { name: "Descargar XLSX" }),
   ).toBeVisible();
-  await expect(page.locator("iframe")).toHaveCount(0);
+  await expect(page.getByTitle(/PDF de lectura T-06/)).toBeVisible();
   await expect(page.getByRole("link", { name: /Descargar/ })).toHaveCount(1);
 });
 
@@ -146,14 +154,14 @@ test("el caso mantiene teclado de pestañas y accesibilidad automatizada", async
       })),
     ).toEqual([]);
   }
-  const summary = page.getByRole("tab", { name: "Resumen navegable" });
+  const summary = page.getByRole("tab", { name: "Introducción" });
   await summary.focus();
   await page.keyboard.press("ArrowRight");
   await expect(
-    page.getByRole("tab", { name: "Documento original" }),
+    page.getByRole("tab", { name: "Documentos de la entrega" }),
   ).toBeFocused();
   await expect(page.getByRole("tabpanel")).toContainText(
-    "Una matriz para explorar, no solo para mirar.",
+    "PDF actualizado y archivo editable disponible por separado",
   );
   await page.keyboard.press("Home");
   await expect(summary).toHaveAttribute("aria-selected", "true");

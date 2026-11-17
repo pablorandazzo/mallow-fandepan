@@ -5,7 +5,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   BookOpen,
-  Check,
   ChevronRight,
   Download,
   FileText,
@@ -113,7 +112,7 @@ function OriginalDocument({ delivery, access }) {
         <p>Comprobando disponibilidad de documentos…</p>
       </div>
     );
-  if (!delivery.sourceFile)
+  if (!delivery.sourceFile && !available?.pdf)
     return (
       <div className="document-message">
         <FolderOpen />
@@ -135,7 +134,7 @@ function OriginalDocument({ delivery, access }) {
         </p>
       </div>
     );
-  if (!available?.original)
+  if (!available?.original && !available?.pdf)
     return (
       <div className="document-message">
         <FileText />
@@ -153,12 +152,14 @@ function OriginalDocument({ delivery, access }) {
           <FileText size={20} />
           <span>
             <strong>
-              {delivery.id} · {delivery.format}
+              {delivery.id} · {available.original ? delivery.format : "PDF"}
             </strong>
             <small>
-              {available.pdf
-                ? "PDF de lectura convertido del Word original"
-                : "Planilla original de la matriz"}
+              {available.pdf && available.original
+                ? "PDF actualizado y archivo editable disponible por separado"
+                : available.pdf
+                  ? "Informe académico en PDF"
+                  : "Planilla original de la matriz"}
             </small>
           </span>
         </div>
@@ -173,13 +174,15 @@ function OriginalDocument({ delivery, access }) {
               Abrir PDF <ArrowUpRight size={16} />
             </a>
           )}
-          <a
-            className="case-action filled"
-            href={documentUrl(delivery.id, "original")}
-            download={delivery.sourceFile}
-          >
-            Descargar {delivery.format} <Download size={16} />
-          </a>
+          {available.original && (
+            <a
+              className="case-action filled"
+              href={documentUrl(delivery.id, "original")}
+              download={delivery.sourceFile}
+            >
+              Descargar {delivery.format} <Download size={16} />
+            </a>
+          )}
         </div>
       </div>
       {available.pdf ? (
@@ -194,7 +197,7 @@ function OriginalDocument({ delivery, access }) {
           </h3>
           <p>
             {delivery.format === "XLSX"
-              ? "Consultá la tabla de dimensiones en el resumen navegable y descargá el Excel para revisar categorías, ítems y ponderaciones completas."
+              ? "Descargá el Excel para consultar la matriz completa."
               : "Todavía no se generó un PDF de lectura para esta fuente. Podés abrir el archivo original con su aplicación correspondiente."}
           </p>
         </div>
@@ -203,109 +206,82 @@ function OriginalDocument({ delivery, access }) {
   );
 }
 
+function DemoResources({ demo }) {
+  const samplePath = `${demo.basePath}/comprobantes_sinteticos`;
+  const evidencePath = `${demo.basePath}/evidencia`;
+
+  return (
+    <section className="demo-resources" aria-labelledby="demo-resources-title">
+      <div className="demo-resources-heading">
+        <div>
+          <h2 id="demo-resources-title">Probá el prototipo</h2>
+          <p>
+            Abrí el formulario de n8n y cargá un comprobante sintético. La demo
+            usa un modelo externo y consume créditos por extracción; no cargues
+            comprobantes reales. Revisá cada campo antes de confirmar.
+          </p>
+        </div>
+        <a className="case-action filled" href={demo.url} target="_blank" rel="noopener noreferrer">
+          Abrir formulario de prueba <ArrowUpRight size={16} />
+        </a>
+      </div>
+
+      <div className="demo-resource-group">
+        <div className="demo-resource-group-heading">
+          <div>
+            <h3>Comprobantes para probar</h3>
+            <p>Empezá con una de estas dos facturas ficticias. El paquete incluye todos los casos de ensayo y sus referencias.</p>
+          </div>
+          <a className="case-action" href={`${demo.basePath}/comprobantes-sinteticos.zip`} download>
+            Descargar todos los comprobantes <Download size={16} />
+          </a>
+        </div>
+        <div className="demo-samples">
+          {demo.samples.map((sample) => (
+            <div className="demo-sample" key={sample.file}>
+              <img src={`${samplePath}/${sample.file}.png`} alt={`Comprobante sintético: ${sample.name}`} loading="lazy" />
+              <div>
+                <strong>{sample.name}</strong>
+                <span>Documento ficticio · sin validez fiscal</span>
+                <div className="demo-sample-links">
+                  <a href={`${samplePath}/${sample.file}.png`} download>Descargar imagen</a>
+                  <a href={`${samplePath}/${sample.file}.pdf`} download>Descargar PDF</a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="demo-resource-note">El paquete también contiene casos de duplicado, montos inconsistentes y un PDF inválido para probar el rechazo. Ese PDF no sirve para una carga correcta.</p>
+      </div>
+
+      <div className="demo-resource-group">
+        <div className="demo-resource-group-heading">
+          <div>
+            <h3>Evidencia técnica</h3>
+            <p>Capturas de la prueba, trazas de ejecución y resultados de las reglas. Son ensayos técnicos, no una validación de usuarios de Fan de Pan.</p>
+          </div>
+          <a className="case-action" href={`${demo.basePath}/evidencia-tecnica.zip`} download>
+            Descargar toda la evidencia <Download size={16} />
+          </a>
+        </div>
+        <div className="demo-evidence-grid">
+          {demo.evidence.map((item) => (
+            <a href={`${evidencePath}/${item.file}`} target="_blank" rel="noopener noreferrer" key={item.file}>
+              <img src={`${evidencePath}/${item.file}`} alt="" loading="lazy" />
+              <span>{item.name} <ArrowUpRight size={15} /></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Summary({ delivery }) {
   return (
     <div className="delivery-summary">
-      <div className="delivery-question">
-        <BookOpen size={22} />
-        <div>
-          <span>LA PREGUNTA QUE RESUELVE</span>
-          <h2>{delivery.question}</h2>
-        </div>
-      </div>
-      {delivery.takeaways?.length > 0 && (
-        <section className="takeaway-section">
-          <h2>Lo esencial, en pocas líneas.</h2>
-          <ul>
-            {delivery.takeaways.map((takeaway) => (
-              <li key={takeaway}>
-                <Check size={17} />
-                <span>{takeaway}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-      <div className="delivery-sections">
-        {delivery.sections?.map((section, index) => (
-          <section key={section.title}>
-            <span className="section-number">0{index + 1}</span>
-            <div>
-              <h2>{section.title}</h2>
-              <p>{section.body}</p>
-              {section.bullets?.length > 0 && (
-                <ul>
-                  {section.bullets.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          </section>
-        ))}
-      </div>
-      {delivery.matrix && (
-        <section className="matrix-section">
-          <h2>Los criterios de evaluación.</h2>
-          <p>
-            Resumen de dimensiones. El detalle completo de categorías e ítems
-            está en el Excel original.
-          </p>
-          <div
-            className="case-table-scroll"
-            tabIndex={0}
-            role="region"
-            aria-label="Dimensiones de la matriz RFP"
-          >
-            <table>
-              <caption>Matriz de evaluación · Nivel de aspectos</caption>
-              <thead>
-                <tr>
-                  {delivery.matrix.columns.map((column) => (
-                    <th key={column} scope="col">
-                      {column}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {delivery.matrix.rows.map((row, index) => (
-                  <tr key={index}>
-                    {row.map((cell, cellIndex) =>
-                      cellIndex === 0 ? (
-                        <th key={cellIndex} scope="row">
-                          {cell}
-                        </th>
-                      ) : (
-                        <td key={cellIndex}>{cell}</td>
-                      ),
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      )}
-      {delivery.caveat && (
-        <aside className="delivery-caveat">
-          <ShieldCheck size={21} />
-          <div>
-            <strong>Cómo leer esta entrega</strong>
-            <p>{delivery.caveat}</p>
-          </div>
-        </aside>
-      )}
-      {delivery.nextStep && (
-        <div className="delivery-next-step">
-          <span>EL SIGUIENTE PASO</span>
-          <p>{delivery.nextStep}</p>
-        </div>
-      )}
-      <p className="summary-provenance">
-        Síntesis web del equipo Mallow. No es una transcripción del documento ni
-        acredita una implementación realizada.
-      </p>
+      <p className="delivery-intro">{delivery.summary}</p>
+      {delivery.demo && <DemoResources demo={delivery.demo} />}
     </div>
   );
 }
@@ -333,9 +309,8 @@ function Overview({ navigate }) {
           <em>Una red que se conoce.</em>
         </h1>
         <p>
-          De la información dispersa a una propuesta de gestión financiera
-          compartida. Un recorrido por el diagnóstico, las alternativas y las
-          decisiones de nuestra consultoría.
+          Una consultoría sobre la gestión financiera de más de 45 locales: qué
+          se relevó, qué proveedor se recomienda y qué falta comprobar.
         </p>
         <div className="case-overview-tags">
           <span>Gastronomía y franquicias</span>
@@ -346,28 +321,26 @@ function Overview({ navigate }) {
       <div className="case-executive">
         <article>
           <span>01 / EL DESAFÍO</span>
-          <h2>Crecer con información.</h2>
+          <h2>Información financiera dispersa.</h2>
           <p>
-            La expansión de la red necesita criterios financieros comunes e
-            información comparable entre locales y casa matriz.
+            Los locales registran costos con criterios diferentes. La casa
+            matriz consolida los resultados a mano.
           </p>
         </article>
         <article>
           <span>02 / EL ALCANCE</span>
-          <h2>Fundamentar una decisión.</h2>
+          <h2>Recomendar un proveedor.</h2>
           <p>
-            Diagnosticar, diseñar la transformación y evaluar soluciones de
-            mercado. La contratación y la implementación no forman parte de esta
-            consultoría.
+            Ayres IT lidera la matriz, pero debe demostrar requisitos obligatorios
+            y cerrar condiciones antes de contratar.
           </p>
         </article>
         <article>
           <span>03 / EL CAMINO</span>
-          <h2>Probar antes de escalar.</h2>
+          <h2>Un piloto propuesto y una demo técnica.</h2>
           <p>
-            Una propuesta SaaS con cinco locales piloto y despliegue por
-            oleadas. La oportunidad de IA se trabaja como prototipo, no como un
-            producto en operación.
+            Se proponen cinco locales piloto. La demo de IA usa comprobantes
+            sintéticos y todavía no se integró a AyresERP.
           </p>
         </article>
       </div>
@@ -624,7 +597,7 @@ export default function CasePage() {
             <ShieldCheck size={16} />
             <p>
               {access.enabled
-                ? "Acceso al caso habilitado · Resúmenes, PDFs de lectura y documentos originales"
+                ? "Acceso al caso habilitado · Introducciones, PDFs de lectura y documentos originales"
                 : "Comprobando documentos del proyecto…"}
             </p>
           </div>
@@ -676,7 +649,6 @@ export default function CasePage() {
                   <h1 id="case-page-heading" tabIndex={-1}>
                     {delivery.title}
                   </h1>
-                  <p>{delivery.summary}</p>
                 </header>
                 <div
                   className="delivery-tabs"
@@ -693,7 +665,7 @@ export default function CasePage() {
                     onClick={() => setView("summary")}
                   >
                     <BookOpen size={17} />
-                    Resumen navegable
+                    Introducción
                   </button>
                   <button
                     id="delivery-tab-original"
@@ -704,7 +676,7 @@ export default function CasePage() {
                     onClick={() => setView("original")}
                   >
                     <FileText size={17} />
-                    Documento original
+                    Documentos de la entrega
                     {!access.enabled && <LockKeyhole size={12} />}
                   </button>
                 </div>

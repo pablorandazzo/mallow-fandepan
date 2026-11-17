@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
   await page.addInitScript(key => sessionStorage.setItem(key, 'granted'), CASE_ACCESS_STORAGE_KEY);
 });
 
-test("el sitio incluye nueve originales y ocho PDFs reales", async ({
+test("el sitio incluye nueve editables y diez PDFs actualizados", async ({
   request,
 }) => {
   const manifest = await (await request.get("/case-documents/manifest.json")).json();
@@ -13,13 +13,15 @@ test("el sitio incluye nueve originales y ocho PDFs reales", async ({
   expect(
     manifest.documents.filter((document) => document.original),
   ).toHaveLength(9);
-  expect(manifest.documents.filter((document) => document.pdf)).toHaveLength(8);
+  expect(manifest.documents.filter((document) => document.pdf)).toHaveLength(10);
   for (const document of manifest.documents) {
-    const original = await request.head(
-      `/case-documents/${document.id.toLowerCase()}.${document.format.toLowerCase()}`,
-    );
-    expect(original.status()).toBe(200);
-    expect(Number(original.headers()["content-length"])).toBeGreaterThan(0);
+    if (document.original) {
+      const original = await request.head(
+        `/case-documents/${document.id.toLowerCase()}.${document.format.toLowerCase()}`,
+      );
+      expect(original.status()).toBe(200);
+      expect(Number(original.headers()["content-length"])).toBeGreaterThan(0);
+    }
     if (document.pdf) {
       const pdf = await request.head(
         `/case-documents/${document.id.toLowerCase()}.pdf`,
@@ -27,7 +29,7 @@ test("el sitio incluye nueve originales y ocho PDFs reales", async ({
       expect(pdf.headers()["content-type"]).toBe("application/pdf");
     }
   }
-  expect(manifest.documents.some(document => document.id === 'T-10')).toBe(false);
+  expect(manifest.documents.find(document => document.id === 'T-10')).toMatchObject({ original: false, pdf: true });
   expect((await request.get("/.local-documents/t-01.pdf")).status()).toBe(403);
 });
 
@@ -52,7 +54,7 @@ test("el PDF se carga solo al elegir documento, y permite abrir o descargar la f
       response.url().includes("/case-documents/t-01.pdf") &&
       response.request().method() === "GET",
   );
-  await page.getByRole("tab", { name: "Documento original" }).click();
+  await page.getByRole("tab", { name: "Documentos de la entrega" }).click();
   await expect(page.getByTitle(/PDF de lectura T-01/)).toBeVisible();
   const pdf = await response;
   expect(pdf.status()).toBe(200);
@@ -72,23 +74,58 @@ test("el PDF se carga solo al elegir documento, y permite abrir o descargar la f
   await page.screenshot({ path: "test-results/case-pdf.png", fullPage: true });
 });
 
-test("la RFP conserva su Excel y no inventa un PDF de la planilla", async ({
+test("la RFP ofrece el PDF resumen y la matriz Excel completa", async ({
   page,
   request,
 }) => {
   const manifest = await (await request.get("/case-documents/manifest.json")).json();
   expect(manifest.documents.find(document => document.id === 'T-06')?.original).toBe(true);
   await page.goto("/caso-fan-de-pan?entrega=t-06");
-  await page.getByRole("tab", { name: "Documento original" }).click();
+  await page.getByRole("tab", { name: "Documentos de la entrega" }).click();
   await expect(
     page.getByRole("link", { name: "Descargar XLSX" }),
   ).toBeVisible();
-  await expect(
-    page.getByRole("heading", {
-      name: "Una matriz para explorar, no solo para mirar.",
-    }),
-  ).toBeVisible();
-  await expect(page.locator("iframe")).toHaveCount(0);
+  await expect(page.getByTitle(/PDF de lectura T-06/)).toHaveAttribute('src', '/case-documents/t-06.pdf');
   const response = await request.get("/case-documents/t-06.xlsx");
   expect((await response.body()).subarray(0, 2).toString()).toBe("PK");
+});
+
+test("T-10 permite leer el informe PDF sin ofrecer un editable inexistente", async ({ page, request }) => {
+  await page.goto('/caso-fan-de-pan?entrega=t-10');
+  await page.getByRole('tab', { name: 'Documentos de la entrega' }).click();
+  await expect(page.getByTitle(/PDF de lectura T-10/)).toHaveAttribute('src', '/case-documents/t-10.pdf');
+  await expect(page.getByRole('link', { name: /Descargar/ })).toHaveCount(0);
+  const pdf = await request.get('/case-documents/t-10.pdf');
+  expect((await pdf.body()).subarray(0, 5).toString()).toBe('%PDF-');
+});
+
+test("el resumen T-10 enlaza la demo y permite consultar y descargar comprobantes y evidencia", async ({ page, request }) => {
+  await page.goto('/caso-fan-de-pan?entrega=t-10');
+  const resources = page.getByRole('region', { name: 'Probá el prototipo' });
+  await expect(resources.getByRole('link', { name: 'Abrir formulario de prueba' })).toHaveAttribute(
+    'href', 'https://fce2026.app.n8n.cloud/form/fdp-t10-demo-995b4dbb2c3440e198b77d1bbf6ac41f',
+  );
+  await expect(resources.getByRole('link', { name: 'Abrir formulario de prueba' })).toHaveAttribute('target', '_blank');
+  await expect(resources.getByRole('link', { name: 'Descargar imagen' })).toHaveCount(2);
+  await expect(resources.getByRole('link', { name: 'Descargar PDF' })).toHaveCount(2);
+  await expect(resources.getByRole('link', { name: /Gasto de prueba confirmado/ })).toBeVisible();
+  for (const [name, signature] of [
+    ['comprobantes-sinteticos.zip', 'PK'],
+    ['evidencia-tecnica.zip', 'PK'],
+    ['comprobantes_sinteticos/10-primera-carga-para-presentar.png', '\x89PNG'],
+    ['comprobantes_sinteticos/11-factura-sintetica-89721981.pdf', '%PDF-'],
+    ['evidencia/evidencia-confirmacion.png', '\x89PNG'],
+  ]) {
+    const asset = await request.get(`/case-documents/t10-demo/${name}`);
+    expect(asset.status()).toBe(200);
+    expect((await asset.body()).subarray(0, signature.length).toString('latin1')).toBe(signature);
+  }
+  const download = page.waitForEvent('download');
+  await resources.getByRole('link', { name: 'Descargar toda la evidencia' }).click();
+  expect((await download).suggestedFilename()).toBe('evidencia-tecnica.zip');
+  await resources.screenshot({ path: 'test-results/t10-resources-desktop.png' });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await resources.screenshot({ path: 'test-results/t10-resources-mobile.png' });
+  const dimensions = await page.evaluate(() => ({ page: document.documentElement.scrollWidth, viewport: innerWidth }));
+  expect(dimensions.page).toBeLessThanOrEqual(dimensions.viewport);
 });

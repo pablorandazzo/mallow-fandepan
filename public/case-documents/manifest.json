@@ -40,7 +40,7 @@
     {
       "id": "T-06",
       "original": true,
-      "pdf": false,
+      "pdf": true,
       "format": "XLSX",
       "sourceFile": "TPL 06 actualizado.xlsx"
     },
@@ -64,6 +64,13 @@
       "pdf": true,
       "format": "DOCX",
       "sourceFile": "TPL 09.docx"
+    },
+    {
+      "id": "T-10",
+      "original": false,
+      "pdf": true,
+      "format": null,
+      "sourceFile": null
     }
   ]
 }

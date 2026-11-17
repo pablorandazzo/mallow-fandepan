@@ -69,7 +69,7 @@ export const team = [
   {
     name: "Agustín Duarte",
     initials: "AD",
-    role: "Scrum Master",
+    role: "QA",
     color: "peach",
   },
   {
@@ -81,13 +81,13 @@ export const team = [
   {
     name: "Lourdes Devit",
     initials: "LD",
-    role: "Analista Funcional",
+    role: "Marketing",
     color: "pink",
   },
   {
     name: "Lucía Nahir Dumit",
     initials: "LN",
-    role: "Consultora de Procesos",
+    role: "Operaciones",
     color: "sage",
   },
   {
@@ -96,5 +96,5 @@ export const team = [
     role: "Programador / Analista Funcional",
     color: "lilac",
   },
-  { name: "Ramiro Scheinaizen", initials: "RS", role: "QA", color: "peach" },
+  { name: "Ramiro Scheinaizen", initials: "RS", role: "Comercial", color: "peach" },
 ];
