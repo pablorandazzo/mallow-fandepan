@@ -141,9 +141,9 @@ export const caseDeliveries = [
     title: "Carpeta de cierre y presentación final",
     shortTitle: "Cierre del caso",
     stage: "cierre",
-    status: "Pendiente",
+    status: "Disponible",
     sourceFile: null,
     format: null,
-    summary: "El plan de trabajo prevé una carpeta de cierre y una presentación final. Todavía no hay un documento T-11 incorporado.",
+    summary: "Sintetiza los resultados de la consultoría, la recomendación condicionada de Ayres IT, el despliegue gradual propuesto y las validaciones pendientes del prototipo de IA.",
   },
 ];

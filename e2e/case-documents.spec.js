@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
   await page.addInitScript(key => sessionStorage.setItem(key, 'granted'), CASE_ACCESS_STORAGE_KEY);
 });
 
-test("el sitio incluye nueve editables y diez PDFs actualizados", async ({
+test("el sitio incluye nueve editables y once PDFs actualizados", async ({
   request,
 }) => {
   const manifest = await (await request.get("/case-documents/manifest.json")).json();
@@ -13,7 +13,7 @@ test("el sitio incluye nueve editables y diez PDFs actualizados", async ({
   expect(
     manifest.documents.filter((document) => document.original),
   ).toHaveLength(9);
-  expect(manifest.documents.filter((document) => document.pdf)).toHaveLength(10);
+  expect(manifest.documents.filter((document) => document.pdf)).toHaveLength(11);
   for (const document of manifest.documents) {
     if (document.original) {
       const original = await request.head(
@@ -30,6 +30,7 @@ test("el sitio incluye nueve editables y diez PDFs actualizados", async ({
     }
   }
   expect(manifest.documents.find(document => document.id === 'T-10')).toMatchObject({ original: false, pdf: true });
+  expect(manifest.documents.find(document => document.id === 'T-11')).toMatchObject({ original: false, pdf: true });
   expect((await request.get("/.local-documents/t-01.pdf")).status()).toBe(403);
 });
 
@@ -90,14 +91,19 @@ test("la RFP ofrece el PDF resumen y la matriz Excel completa", async ({
   expect((await response.body()).subarray(0, 2).toString()).toBe("PK");
 });
 
-test("T-10 permite leer el informe PDF sin ofrecer un editable inexistente", async ({ page, request }) => {
-  await page.goto('/caso-fan-de-pan?entrega=t-10');
+for (const id of ['T-10', 'T-11']) {
+test(`${id} permite leer el informe PDF sin ofrecer un editable inexistente`, async ({ page, request }) => {
+  await page.goto(`/caso-fan-de-pan?entrega=${id.toLowerCase()}`);
+  await expect(page.locator('.delivery-header .delivery-status')).toHaveText('Disponible');
   await page.getByRole('tab', { name: 'Documentos de la entrega' }).click();
-  await expect(page.getByTitle(/PDF de lectura T-10/)).toHaveAttribute('src', '/case-documents/t-10.pdf');
+  await expect(page.getByTitle(new RegExp(`PDF de lectura ${id}`))).toHaveAttribute('src', `/case-documents/${id.toLowerCase()}.pdf`);
   await expect(page.getByRole('link', { name: /Descargar/ })).toHaveCount(0);
-  const pdf = await request.get('/case-documents/t-10.pdf');
+  const pdf = await request.get(`/case-documents/${id.toLowerCase()}.pdf`);
+  expect(pdf.status()).toBe(200);
+  expect(pdf.headers()['content-type']).toBe('application/pdf');
   expect((await pdf.body()).subarray(0, 5).toString()).toBe('%PDF-');
 });
+}
 
 test("el resumen T-10 enlaza la demo y permite consultar y descargar comprobantes y evidencia", async ({ page, request }) => {
   await page.goto('/caso-fan-de-pan?entrega=t-10');

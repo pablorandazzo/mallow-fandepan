@@ -14,13 +14,13 @@ const files = [];
 const pdfNames = await readdir(pdfDir);
 const pdfById = new Map();
 for (const filename of pdfNames) {
-  const match = /^(\d{2})-.+\.pdf$/i.exec(filename);
+  const match = /^(\d{2})[-_].+\.pdf$/i.exec(filename);
   if (!match) continue;
   const id = `T-${match[1]}`;
   if (pdfById.has(id)) throw new Error(`Duplicate PDF for ${id}`);
   pdfById.set(id, path.join(pdfDir, filename));
 }
-const expectedIds = [...Object.keys(documentFiles), 'T-10'];
+const expectedIds = [...Object.keys(documentFiles), 'T-10', 'T-11'];
 if (pdfById.size !== expectedIds.length || expectedIds.some(id => !pdfById.has(id))) {
   throw new Error(`Expected updated PDFs for ${expectedIds.join(', ')}`);
 }
@@ -36,6 +36,7 @@ for (const [id, filename] of Object.entries(documentFiles)) {
   entries.push(entry);
 }
 entries.push({ id: 'T-10', original: false, pdf: true, format: null, sourceFile: null });
+entries.push({ id: 'T-11', original: false, pdf: true, format: null, sourceFile: null });
 for (const id of expectedIds) {
   const pdf = pdfById.get(id);
   const bytes = await readFile(pdf);

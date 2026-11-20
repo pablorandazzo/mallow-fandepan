@@ -46,14 +46,11 @@ test("cada entrega tiene contenido, estado y URL propia sin simular pendientes",
     await expect(page.locator(".delivery-intro")).toHaveCount(1);
     await expect(page.locator(".delivery-sections > section")).toHaveCount(0);
     await expect(page.locator(".delivery-header .delivery-status")).toHaveText(
-      number <= 10 ? "Disponible" : "Pendiente",
+      "Disponible",
     );
   }
   await page.getByRole("tab", { name: "Documentos de la entrega" }).click();
-  await expect(
-    page.getByRole("heading", { name: "Documento pendiente" }),
-  ).toBeVisible();
-  await expect(page.locator("iframe")).toHaveCount(0);
+  await expect(page.getByTitle(/PDF de lectura T-11/)).toHaveAttribute('src', '/case-documents/t-11.pdf');
   await page.reload();
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "Carpeta de cierre",

@@ -32,7 +32,7 @@ La suite utiliza el sitio en `http://127.0.0.1:5178`. Los originales funcionan t
 - `src/CasePage.jsx`, `src/case.css`: página del caso, índice, introducciones breves, pestañas y visor PDF nativo del navegador.
 - `src/caseContent.js`: once entregas, fuentes, estados e introducciones basadas en los PDF actualizados.
 - `src/CaseAccessGate.jsx`, `src/caseAccess.js`: contraseña académica en frontend, persistencia por pestaña y salida del caso.
-- `public/case-documents/`: nueve archivos editables DOCX/XLSX, diez PDF de lectura y su catálogo estático.
+- `public/case-documents/`: nueve archivos editables DOCX/XLSX, once PDF de lectura y su catálogo estático.
 - `public/case-documents/t10-demo/`: dos paquetes ZIP con los comprobantes sintéticos y la evidencia técnica, más cuatro archivos de prueba destacados y seis capturas visibles desde el resumen de T-10.
 - `server/caseDocuments.mjs`: acceso documental local optativo y cerrado por defecto; no es una autenticación de producción.
 
@@ -44,7 +44,7 @@ El sitio presenta a Mallow como consultora y a Fan de Pan como caso de diagnóst
 
 El botón **Explorar el caso** abre un resumen con **Ir al caso Fan de Pan**. La ruta `/caso-fan-de-pan` ofrece una vista ejecutiva y navegación T-01 a T-11; `?entrega=t-01` permite compartir y recargar una entrega concreta. Incluye navegación anterior/siguiente, historial del navegador y selector móvil.
 
-Cada entrega tiene una breve introducción y una pestaña de documentos. T-01–T-10 tienen PDF; T-11 sigue pendiente. Disponible significa que existe un documento, no que esté aprobado por el sponsor. El prototipo T-10 tiene QA técnica, pero no validación con usuarios ni integración productiva.
+Cada entrega tiene una breve introducción y una pestaña de documentos. T-01–T-11 tienen PDF. Disponible significa que existe un documento, no que esté aprobado por el sponsor. El prototipo T-10 tiene QA técnica, pero no validación con usuarios ni integración productiva.
 
 Por decisión explícita del usuario, el caso usa la contraseña académica `fce2026` definida en texto plano en el frontend. El acceso se recuerda en `sessionStorage`, conserva los enlaces directos a entregas y puede cerrarse con **Salir del caso**. Es una barrera de presentación, no autenticación de servidor: los archivos estáticos se pueden consultar mediante su URL. El usuario también autorizó incluir los originales en el sitio; ya no se bloquean detrás de un requisito de servidor. El correo comercial sigue sin definirse y no se simulan envíos.
 
@@ -52,15 +52,15 @@ Publicar solamente `dist/`, generado por Vite.
 
 ## Documentos originales y PDFs
 
-Los nueve archivos editables Word y Excel se leen desde `../../Contexto/Templates Resueltos` respecto de la raíz del repositorio. Los diez PDF actualizados (T-01 a T-10) se leen desde `.local-documents/Nuevos PDF actualizados/`. Para publicar los documentos:
+Los nueve archivos editables Word y Excel se leen desde `../../Contexto/Templates Resueltos` respecto de la raíz del repositorio. Los once PDF actualizados (T-01 a T-11) se leen desde `.local-documents/Nuevos PDF actualizados/`. Se admiten nombres con el número de entrega seguido de guion o guion bajo, sin renombrar las fuentes. Para publicar los documentos:
 
 ```sh
 npm run documents:publish
 ```
 
-La publicación copia los nueve editables y los diez PDF a `public/case-documents/` y verifica cada copia por SHA-256. Los PDF son informes actualizados suministrados por separado: no se generan de los editables publicados, que pueden conservar versiones anteriores. T-06 ofrece un resumen PDF y la matriz completa XLSX; T-10 solo tiene PDF. El comando `documents:prepare` sigue siendo una utilidad para convertir los Word legados en una caché local, pero no alimenta la publicación de estos PDF.
+La publicación copia los nueve editables y los once PDF a `public/case-documents/` y verifica cada copia por SHA-256. Los PDF son informes actualizados suministrados por separado: no se generan de los editables publicados, que pueden conservar versiones anteriores. T-06 ofrece un resumen PDF y la matriz completa XLSX; T-10 y T-11 solo tienen PDF. El comando `documents:prepare` sigue siendo una utilidad para convertir los Word legados en una caché local, pero no alimenta la publicación de estos PDF.
 
-Después de ingresar al caso se pueden previsualizar diez PDF y descargar nueve editables DOCX/XLSX, tanto en desarrollo como en producción. El visor se carga solo al abrir la pestaña y ofrece apertura en otra pestaña si el navegador no integra PDF. Los enlaces de descarga conservan el nombre del archivo editable. T-11 permanece pendiente.
+Después de ingresar al caso se pueden previsualizar once PDF y descargar nueve editables DOCX/XLSX, tanto en desarrollo como en producción. El visor se carga solo al abrir la pestaña y ofrece apertura en otra pestaña si el navegador no integra PDF. Los enlaces de descarga conservan el nombre del archivo editable. T-11 incorpora la carpeta de cierre del proyecto.
 
 El resumen T-10 enlaza directamente al formulario externo de n8n y ofrece los comprobantes mencionados en el informe en PNG/PDF. Para compartir el conjunto completo de archivos de prueba (incluido el PDF intencionalmente inválido) y la evidencia de QA, publicar los paquetes desde las carpetas `Trabajo revisado/Demo n8n T10/comprobantes_sinteticos` y `evidencia` con `npm run documents:publish-t10-demo`. La evidencia incluye capturas, trazas de ensayo y resultados TAP; corresponde a QA técnica, no a validación por usuarios de Fan de Pan. Los ZIP y las capturas son archivos estáticos accesibles mediante su URL, independientemente de la contraseña visual del caso.
 
