@@ -36,7 +36,7 @@ La suite utiliza el sitio en `http://127.0.0.1:5178`. Los originales funcionan t
 - `public/case-documents/t10-demo/`: dos paquetes ZIP con los comprobantes sintéticos y la evidencia técnica, más cuatro archivos de prueba destacados y seis capturas visibles desde el resumen de T-10.
 - `server/caseDocuments.mjs`: acceso documental local optativo y cerrado por defecto; no es una autenticación de producción.
 
-No se usan fotografías de personas inventadas. Las iniciales y la ilustración del caso son composiciones de diseño; las fotos del equipo y el logo oficial de Fan de Pan pueden incorporarse posteriormente. El logo de Mallow sí conserva la identidad original suministrada por el usuario.
+La sección Equipo usa las siete fotografías reales suministradas por el usuario en `.local-documents/Fotos/`, publicadas como retratos cuadrados WebP optimizados en `public/team/`. Los originales se conservan sin modificar. Lucía figura como Lucía Dumit. La ilustración del caso es una composición de diseño; los logos de Mallow y Fan de Pan conservan sus identidades originales.
 
 ## Alcance y privacidad
 

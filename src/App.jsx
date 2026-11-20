@@ -686,10 +686,16 @@ export default function App() {
               {team.map((person, index) => (
                 <Reveal key={person.name} delay={index * 0.03}>
                   <article className="person">
-                    <div className={`avatar avatar-${person.color}`}>
-                      <span>{person.initials}</span>
-                      <Mark />
-                      <span className="person-number">0{index + 1}</span>
+                    <div className={`avatar avatar-${person.color}${person.photo ? " avatar-photo" : ""}`}>
+                      {person.photo ? (
+                        <img className="person-photo" src={person.photo} alt={`Foto de ${person.name}`} width="480" height="480" loading="lazy" decoding="async" />
+                      ) : (
+                        <>
+                          <span>{person.initials}</span>
+                          <Mark />
+                          <span className="person-number">0{index + 1}</span>
+                        </>
+                      )}
                     </div>
                     <h3>{person.name}</h3>
                     <p>{person.role}</p>

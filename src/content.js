@@ -65,36 +65,41 @@ export const steps = [
 ];
 
 export const team = [
-  { name: "Ian Belaev", initials: "IB", role: "Product Owner", color: "lilac" },
+  { name: "Ian Belaev", initials: "IB", role: "Product Owner", color: "lilac", photo: "/team/ian-belaev.webp" },
   {
     name: "Agustín Duarte",
+    photo: "/team/agustin-duarte.webp",
     initials: "AD",
     role: "QA",
     color: "peach",
   },
   {
     name: "Federico Glorioso",
+    photo: "/team/federico-glorioso.webp",
     initials: "FG",
     role: "Project Manager",
     color: "sage",
   },
   {
     name: "Lourdes Devit",
+    photo: "/team/lourdes-devit.webp",
     initials: "LD",
     role: "Marketing",
     color: "pink",
   },
   {
-    name: "Lucía Nahir Dumit",
-    initials: "LN",
+    name: "Lucía Dumit",
+    photo: "/team/lucia-dumit.webp",
+    initials: "LD",
     role: "Operaciones",
     color: "sage",
   },
   {
     name: "Pablo Randazzo",
+    photo: "/team/pablo-randazzo.webp",
     initials: "PR",
     role: "Programador / Analista Funcional",
     color: "lilac",
   },
-  { name: "Ramiro Scheinaizen", initials: "RS", role: "Comercial", color: "peach" },
+  { name: "Ramiro Scheinaizen", initials: "RS", role: "Comercial", color: "peach", photo: "/team/ramiro-scheinaizen.webp" },
 ];
